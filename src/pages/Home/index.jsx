@@ -9,8 +9,8 @@ const Home = () => {
 
     const isAuthenticated = useSelector(state => state.authenticationReducer.isAuthenticated)
     const token = Cookies.get('token')
-    const [posts, setPost] = useState()
-    const [countPost, setCountPost] = useState()
+    const [posts, setPost] = useState([])
+    const [countPost, setCountPost] = useState("")
     let display = true
 
     const fetchAllPosts = () => {
@@ -52,30 +52,30 @@ const Home = () => {
 
     useEffect(() => {
         fetchAllPosts()
-    }, [posts])
-
-    useEffect(() => {
         fetchCountPosts()
-    }, [countPost])
-
+    }, [])
 
 
     return (
         <div>
             <h6 className="py-2">Welcome on<span className="fw-bold"> My Social Network</span> . This website is a training to Redux and React. We use auth and routing to create a small social media website</h6>
             <h6 className="py-2">Subsribe or log in to create posts</h6>
-            <div className="my-5">
-                <span className="badge bg-secondary"> {countPost}</span>
-                {countPost == 0 || countPost == 1 ? " Post" : " Posts"}
-            </div>
+            {isAuthenticated &&
+                <div>
+                    <div className="my-5">
+                        <span class="badge bg-secondary"> {countPost}</span>
+                        {countPost == 0 || countPost == 1 ? " Post" : " Posts"}
+                    </div>
+                    <div className="row">
+                        {posts.map((post, index) =>
+                            <div key={index} className="col-md-3 bg-dark rounded text-white p-3 me-3">
+                                <Link className="nav-link link fs-4" to={`/profile/${post.user.id}`}>{post.user.username}</Link>
+                                <p>{post.text}</p>
+                            </div>)}
+                    </div>
+                </div>
+            }
 
-            <div className="row">
-                {posts ? posts.map((post, index) =>
-                    <div key={index} className="col-md-3 bg-dark rounded text-white p-3 me-3">
-                        <Link className="nav-link link fs-4" to={`/profile/${post.user.id}`}>{post.user.username}</Link>
-                        <p>{post.text}</p>
-                    </div>) : <p>Pas de posts encore</p>}
-            </div >
         </div>
     )
 }

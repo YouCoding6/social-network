@@ -2,15 +2,16 @@ import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import Cookies from 'js-cookie'
 import { logoutSuccess } from 'redux/index'
-
+import { useHistory } from 'react-router-dom'
 const Navbar = () => {
     const isAuthenticated = useSelector(state => state.authenticationReducer.isAuthenticated);
-    // console.log(isAuthenticate)
+    const history = useHistory();
     const dispatch = useDispatch()
     const handleClick = (e) => {
         e.preventDefault()
         dispatch(logoutSuccess())
         Cookies.remove('token');
+        history.push('/')
     }
     return (
         <div className="row navbar navbar-expand-lg align-items-center text-center py-3">

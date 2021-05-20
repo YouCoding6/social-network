@@ -15,6 +15,7 @@ const Profile = () => {
     const [posts, setPosts] = useState([])
     console.log('id', currentUserId)
     const token = Cookies.get('token')
+    const history = useHistory()
 
     const data = {
         username: username,
@@ -46,6 +47,8 @@ const Profile = () => {
             body: JSON.stringify(data),
         })
         const resp = await response.json()
+        history.push('/')
+
     }
 
     const fetchPostCurrentUser = async () => {
@@ -71,7 +74,7 @@ const Profile = () => {
             }
         })
         const resp = await response.json()
-        // return <Redirect to="/" />;
+        history.push('/')
     }
 
     useEffect(() => {
