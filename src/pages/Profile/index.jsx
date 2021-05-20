@@ -1,16 +1,13 @@
 import { useState, useEffect } from 'react'
 import Cookies from 'js-cookie'
-import { useDispatch } from 'react-redux'
-import { Link, Redirect } from 'react-router-dom'
-import DisplayPosts from 'components/Post/DisplayPosts'
-import { useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 
 const Profile = () => {
 
     const [username, setUsername] = useState()
     const [description, setDescription] = useState()
-    const currentUserId = useSelector(state => state.authenticationReducer.user.id)
+    // const currentUserId = useSelector(state => state.authenticationReducer.user.id)
+    const currentUserId = Cookies.get('id')
     const [userId, setUserId] = useState(currentUserId)
     const [posts, setPosts] = useState([])
     console.log('id', currentUserId)
@@ -121,8 +118,6 @@ const Profile = () => {
         </div>
     )
 }
-
-
 
 
 export default Profile

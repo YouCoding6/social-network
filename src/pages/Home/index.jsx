@@ -66,13 +66,15 @@ const Home = () => {
                         <span class="badge bg-secondary"> {countPost}</span>
                         {countPost == 0 || countPost == 1 ? " Post" : " Posts"}
                     </div>
-                    <div className="row">
-                        {posts.map((post, index) =>
-                            <div key={index} className="col-md-3 bg-dark rounded text-white p-3 me-3">
-                                <Link className="nav-link link fs-4" to={`/profile/${post.user.id}`}>{post.user.username}</Link>
-                                <p>{post.text}</p>
-                            </div>)}
-                    </div>
+                    {posts &&
+                        <div className="row">
+                            {posts.map((post, index) =>
+                                <div key={index} className="col-md-3 bg-dark rounded text-white p-3 me-3">
+                                    <Link className="nav-link link fs-4" to={`/profile/${post.user.id}`}>{post.user.username}</Link>
+                                    <p>{post.text}</p>
+                                </div>)}
+                        </div>}
+                    {posts.length == 0 && <p>No post there</p>}
                 </div>
             }
 

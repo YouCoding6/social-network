@@ -63,12 +63,12 @@ const OtherProfil = () => {
             <div className="p-4">
                 <h4 className="mt-5">Posts</h4>
                 <div className="row">
-                    {posts ? posts.map((post, index) =>
+                    {posts.length !== 0 ? posts.map((post, index) =>
                         <div key={index} className="col-md-3 bg-dark rounded text-white me-3 p-3" key="index">
                             <p>{post.user.username}</p>
                             <p>{post.text}</p>
-                        </div>) :
-                        <p>Pas de posts encore</p>}
+                        </div>
+                    ) : <p>Pas de posts encore</p>}
                 </div>
             </div>
         </div>

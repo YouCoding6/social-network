@@ -40,6 +40,7 @@ const SignIn = () => {
                 } else {
                     dispatch(loginSuccess(data.user, data.jwt))
                     Cookies.set('token', data.jwt)
+                    Cookies.set('id', data.user.id)
                     history.push('/')
                 }
             })
